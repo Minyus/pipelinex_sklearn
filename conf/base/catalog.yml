@@ -1,0 +1,10 @@
+# [reference](https://kedro.readthedocs.io/en/latest/04_user_guide/04_data_catalog.html)
+# [kedro.extras.datasets](https://kedro.readthedocs.io/en/latest/kedro.extras.datasets.html)
+# [pipelinex.extras.datasets](https://github.com/Minyus/pipelinex/tree/master/src/pipelinex/extras/datasets)
+
+/: # default
+  type: pickle.PickleDataSet # short for kedro.extras.datasets.pickle.PickleDataSet
+  # type: pandas.CSVDataSet # short for kedro.extras.datasets.pandas.CSVDataSet
+  # cached: False
+  # load_args:
+  # save_args:
