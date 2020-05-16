@@ -3,8 +3,19 @@
 # [pipelinex.extras.datasets](https://github.com/Minyus/pipelinex/tree/master/src/pipelinex/extras/datasets)
 
 /: # default
-  type: pickle.PickleDataSet # short for kedro.extras.datasets.pickle.PickleDataSet
-  # type: pandas.CSVDataSet # short for kedro.extras.datasets.pandas.CSVDataSet
-  # cached: False
-  # load_args:
-  # save_args:
+  type: pandas.CSVDataSet
+  load_args:
+    float_precision: high
+  save_args:
+    float_format: "%.16e"
+  cached: True
+
+train_df:
+  filepath: data/input/train.csv
+
+test_df:
+  filepath: data/input/test.csv
+
+pred_df:
+  filepath: data/load/pred.csv
+  mlflow_logging: True
