@@ -1,6 +1,6 @@
 # PipelineX Scikit-learn
 
-Simple example project using [PipelineX](https://github.com/Minyus/pipelinex), Kedro, and Scikit-learn
+A Simple example project using [PipelineX](https://github.com/Minyus/pipelinex), Kedro, and Scikit-learn
 
 <p align="center">
 <img src="img/kedro_pipeline.png">
@@ -17,7 +17,7 @@ Pipeline visualized by Kedro-viz
 $ pip install pipelinex kedro scikit-learn pandas mlflow kedro-viz
 ```
 
-Note: mlflow and kedro-viz are optional.
+Note: `mlflow` and `kedro-viz` are optional.
 
 ## 2. Clone this repository and run `main.py`
 
