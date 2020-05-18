@@ -5,12 +5,10 @@ model:
   random_state: 42
 
 # Data Description: https://www.kaggle.com/c/titanic/data
-
-cols_features:
-  - Pclass # Ticket class
+cols_features: # Columns used as features in the Titanic data table
+  - Pclass # The passenger's ticket class
   - Parch # # of parents / children aboard the Titanic
-
-col_target: Survived
+col_target: Survived # Column used as the target: whether the passenger survived or not
 
 PIPELINES:
   __default__:
