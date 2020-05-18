@@ -34,6 +34,7 @@ import subprocess
 import sys
 import webbrowser
 
+import yaml
 from itertools import chain
 from pathlib import Path
 from typing import Dict, Iterable, Tuple
@@ -53,6 +54,7 @@ try:
         forward_command,
         python_call,
     )
+    from kedro.framework.context import load_context, validate_source_path
 except (ImportError, ModuleNotFoundError):
     from kedro.cli import main as kedro_main
 
@@ -69,10 +71,11 @@ except (ImportError, ModuleNotFoundError):
         forward_command,
         python_call,
     )
+    from kedro.context import load_context
+
+    validate_source_path = None
 
 from kedro.utils import load_obj
-
-from pipelinex import __version__, configure_source, load_context
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
@@ -80,7 +83,13 @@ CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 PROJ_PATH = Path(__file__).resolve().parent
 os.environ["IPYTHONDIR"] = str(PROJ_PATH / ".ipython")
 
-SOURCE_PATH = configure_source(PROJ_PATH)
+with (PROJ_PATH / ".kedro.yml").open("r") as kedro_yml:
+    kedro_yaml = yaml.safe_load(kedro_yml)
+
+SOURCE_DIR = Path(kedro_yaml.get("source_dir", "src")).expanduser()
+SOURCE_PATH = (PROJ_PATH / SOURCE_DIR).resolve()
+if validate_source_path:
+    validate_source_path(SOURCE_PATH, PROJ_PATH)
 
 KEDRO_PACKAGE_NAME = "YOUR_PACKAGE_NAME_HERE"
 
