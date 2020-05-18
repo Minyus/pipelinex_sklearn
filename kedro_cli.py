@@ -53,11 +53,16 @@ try:
         forward_command,
         python_call,
     )
-except ImportError:
+except (ImportError, ModuleNotFoundError):
     from kedro.cli import main as kedro_main
-    from kedro.cli.catalog import catalog as catalog_group
-    from kedro.cli.jupyter import jupyter as jupyter_group
-    from kedro.cli.pipeline import pipeline as pipeline_group
+
+    # from kedro.cli.catalog import catalog as catalog_group
+    # from kedro.cli.jupyter import jupyter as jupyter_group
+    # from kedro.cli.pipeline import pipeline as pipeline_group
+    catalog_group = None
+    jupyter_group = None
+    pipeline_group = None
+
     from kedro.cli.utils import (
         KedroCliError,
         call,
@@ -477,9 +482,12 @@ def ipython_message(all_kernels=True):
     secho("-" * 79, fg="cyan")
 
 
-cli.add_command(pipeline_group)
-cli.add_command(catalog_group)
-cli.add_command(jupyter_group)
+if pipeline_group:
+    cli.add_command(pipeline_group)
+if catalog_group:
+    cli.add_command(catalog_group)
+if jupyter_group:
+    cli.add_command(jupyter_group)
 
 
 if __name__ == "__main__":
