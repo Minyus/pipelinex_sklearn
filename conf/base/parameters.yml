@@ -24,6 +24,13 @@ PIPELINES:
         func: sklearn_demo.run_inference
         outputs: pred_df
 
+      - inputs: [model, train_df, "params:cols_features", "params:col_target"]
+        func: sklearn_demo.evaluate_model
+        outputs: score
+
+HOOKS:
+  - { =: pipelinex.MLflowOutputsLogger, _ }
+
 RUN_CONFIG:
   pipeline_name: __default__
   runner: SequentialRunner # Set to "ParallelRunner" to run in parallel
