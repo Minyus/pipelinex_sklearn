@@ -29,6 +29,7 @@ PIPELINES:
         outputs: score
 
 HOOKS:
+  - { =: pipelinex.MLflowBasicLoggerHook, _ }
   - { =: pipelinex.MLflowOutputsLoggerHook, _ }
 
 RUN_CONFIG:
