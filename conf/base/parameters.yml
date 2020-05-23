@@ -14,7 +14,7 @@ PIPELINES:
   __default__:
     =: pipelinex.FlexiblePipeline
     module: # Optionally specify the default Python module so you can omit the module name to which functions belongs
-    decorator: [] # Optionally specify function decorator(s) to apply to each node
+    decorator: # Optionally specify function decorator(s) to apply to each node
     nodes:
       - inputs: ["params:model", train_df, "params:cols_features", "params:col_target"]
         func: sklearn_demo.train_model
