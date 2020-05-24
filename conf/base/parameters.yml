@@ -60,6 +60,12 @@ HOOKS:
 
   - =: pipelinex.MLflowTimeLoggerHook # Log duration time for each node (task)
     enable_mlflow: True # Enable logging to MLflow
+
+  - =: pipelinex.AddTransformersHook # Add transformers
+    transformers: 
+      =: pipelinex.MLflowIOTimeLoggerTransformer
+      enable_mlflow: True
+
 #
 # Command to run mlflow server:
 # $ mlflow server --host 0.0.0.0 --backend-store-uri sqlite:///mlruns/sqlite.db --default-artifact-root ./mlruns/experiment_001
