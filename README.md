@@ -27,6 +27,18 @@ $ cd pipelinex_sklearn
 $ python main.py
 ```
 
+## 3. [Optional] View the experiment logs in MLflow's UI 
+
+```bash
+$ mlflow server --host 0.0.0.0 --backend-store-uri sqlite:///mlruns/sqlite.db --default-artifact-root ./mlruns/experiment_001
+```
+
+<p align="center">
+<img src="img/mlflow_ui.png">
+Experiment logs in MLflow's UI
+</p>
+
+
 ## Tested environment
 
 - Python 3.6.8
