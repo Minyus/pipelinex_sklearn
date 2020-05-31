@@ -44,7 +44,7 @@ Experiment logs in MLflow's UI
 - Python 3.6.8
 
 
-## Template repositories
+## Simplified Kedro project template
 
 This project was created from the GitHub template repository at https://github.com/Minyus/pipelinex_template
 
