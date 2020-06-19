@@ -1,6 +1,7 @@
-# PipelineX Scikit-learn
+# PipelineX Scikit-learn (Basic full-YAML example of PipelineX)
 
-A Simple example project using [PipelineX](https://github.com/Minyus/pipelinex), Kedro, and Scikit-learn
+A simple example project using Kedro, MLflow, and [PipelineX](https://github.com/Minyus/pipelinex) to run Scikit-learn tasks.
+If you are not a YAML lover, you may prefer [limited-YAML version](https://github.com/Minyus/kedro_mlflow).
 
 <p align="center">
 <img src="img/kedro_pipeline.png">
