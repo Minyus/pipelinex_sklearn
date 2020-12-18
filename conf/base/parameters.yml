@@ -1,4 +1,4 @@
-# Dataset: Kaggle Titanic
+# Dataset: Iris 
 # URL: https://www.kaggle.com/uciml/iris/data
 # Modification: for each species, setosa is encoded to 0, versicolor is encoded to 1, and virginica samples are removed.
 # Split: for each species,  first 25 samples are used in train.csv, and last 25 samples are used in test.csv.
@@ -14,7 +14,7 @@ cols_features:
 col_target: species
 
 
-# Dataset: Kaggle Titanic:
+# Dataset: Kaggle Titanic
 # URL: https://www.kaggle.com/c/titanic/data
 #
 # Columns used as features 
@@ -24,70 +24,3 @@ col_target: species
 #
 # Columns used as features 
 # col_target: Survived
-
-
-model:
-  =: sklearn.linear_model.LogisticRegression
-  C: 1.23456
-  max_iter: 987
-  random_state: 42
-
-PIPELINES:
-  __default__:
-    =: pipelinex.FlexiblePipeline
-    module: # Optionally specify the default Python module so you can omit the module name to which functions belongs
-    decorator: # Optionally specify function decorator(s) to apply to each node
-    nodes:
-      - inputs: ["params:model", train_df, "params:cols_features", "params:col_target"]
-        func: sklearn_demo.train_model
-        outputs: model
-
-      - inputs: [model, test_df, "params:cols_features"]
-        func: sklearn_demo.run_inference
-        outputs: pred_df
-
-      - inputs: [model, train_df, "params:cols_features", "params:col_target"]
-        func: sklearn_demo.evaluate_model
-        outputs: score
-
-RUN_CONFIG:
-  pipeline_name: __default__
-  runner: SequentialRunner # Set to "ParallelRunner" to run in parallel
-  only_missing: False # Set True to run only missing nodes
-  tags: # None
-  node_names: # None
-  from_nodes: # None
-  to_nodes: # None
-  from_inputs: # None
-  load_versions: # None
-
-HOOKS:
-  - =: pipelinex.MLflowBasicLoggerHook # Configure and log duration time for the pipeline 
-    enable_mlflow: True # Enable configuring and logging to MLflow
-    uri: sqlite:///mlruns/sqlite.db
-    experiment_name: experiment_001
-    artifact_location: ./mlruns/experiment_001
-    offset_hours: 0 # Specify the offset hour (e.g. 0 for UTC/GMT +00:00) to log in MLflow
-
-  - =: pipelinex.MLflowArtifactsLoggerHook # Log artifacts of specified file paths and dataset names
-    enable_mlflow: True # Enable logging to MLflow
-    filepaths_before_pipeline_run: # Optionally specify the file paths to log before pipeline is run
-      - conf/base/parameters.yml
-    datasets_after_node_run: # Optionally specify the dataset names to log after the node is run
-      - model
-    filepaths_after_pipeline_run: # None  # Optionally specify the file paths to log after pipeline is run
-
-  - =: pipelinex.MLflowDataSetsLoggerHook # Log datasets of (list of) float, int, and str classes
-    enable_mlflow: True # Enable logging to MLflow
-
-  - =: pipelinex.MLflowTimeLoggerHook # Log duration time to run each node (task)
-    enable_mlflow: True # Enable logging to MLflow
-
-  - =: pipelinex.AddTransformersHook # Add transformers
-    transformers: 
-      =: pipelinex.MLflowIOTimeLoggerTransformer # Log duration time to load and save each dataset
-      enable_mlflow: True
-
-#
-# Command to run mlflow server:
-# $ mlflow server --host 0.0.0.0 --backend-store-uri sqlite:///mlruns/sqlite.db --default-artifact-root ./mlruns/experiment_001
