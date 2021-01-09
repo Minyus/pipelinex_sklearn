@@ -1,5 +1,8 @@
 # PipelineX Scikit-learn (Basic full-YAML example of PipelineX)
 
+## This project works with Kedro 0.16.x only.
+## Please use [kedro-starters-sklearn](https://github.com/Minyus/kedro-starters-sklearn) which works with Kedro 0.17.x.
+
 A simple example project using Kedro, MLflow, and [PipelineX](https://github.com/Minyus/pipelinex) to run Scikit-learn tasks.
 If you are not a YAML lover, you may prefer [limited-YAML version](https://github.com/Minyus/kedro_mlflow).
 
